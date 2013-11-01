@@ -1,17 +1,21 @@
-class video-card (
+class video-driver (
     $controller     = 'vesa',
     $install_32bit  = false,
     $open_source    = true,
 ){
     case $open_source {
-        'true': {
+        true: {
             case $controller {
                 'vesa':     { $package_name = 'xf86-video-vesa' }
                 'intel':    { $package_name = 'xf86-video-intel' }
                 'nvidia':   { $package_name = 'xf86-video-nvidia' }
                 'ati':      { $package_name = 'xf86-video-ati' }
+                'via':      { $package_name = 'xf86-video-openchrome' }
             }
-            package { $package_name: ensure => present }
+            package { 'video-driver':
+              ensure => present,
+              name   => $package_name,
+            }
 
             if $install_32bit == 'true' {
                 case $controller {
@@ -20,18 +24,24 @@ class video-card (
                     'ati':      { $package32_name = 'lib32-ati-dri' }
                 }
                 if $package32_name {
-                    package { $package32_name: ensure => present }
+                    package { 'video_driver32':
+                        ensure => present,
+                        name   => $package32_name,
+                    }
                 }
             }
         }
-        'false': {
+        false: {
             case $controller {
                 'ati':      { $package_name = 'catalyst-dkms' }
                 'intel':    { $package_name = 'xf86-video-intel' }
                 'nvidia':   { $package_name = 'nvidia' }
                 'vesa':     { $package_name = 'xf86-video-vesa' }
             }
-            package { $package_name: ensure => present }
+            package { 'video-driver':
+              ensure => present,
+              name   => $package_name,
+            }
 
             if $install_32bit == 'true' {
                 case $controller {
@@ -40,7 +50,10 @@ class video-card (
                     'nvidia':   { $package32_name = 'lib32-nvidia-utils' }
                 }
                 if $package32_name {
-                    package { $package32_name: ensure => present }
+                    package { 'video_driver32':
+                        ensure => present,
+                        name   => $package32_name,
+                    }
                 }
             }
         }
