@@ -1,4 +1,4 @@
-class video-driver (
+class video-card (
     $controller     = 'vesa',
     $install_32bit  = false,
     $open_source    = true,
@@ -12,7 +12,7 @@ class video-driver (
                 'ati':      { $package_name = 'xf86-video-ati' }
                 'via':      { $package_name = 'xf86-video-openchrome' }
             }
-            package { 'video-driver':
+            package { 'video-card':
               ensure => present,
               name   => $package_name,
             }
@@ -24,7 +24,7 @@ class video-driver (
                     'ati':      { $package32_name = 'lib32-ati-dri' }
                 }
                 if $package32_name {
-                    package { 'video_driver32':
+                    package { 'video_card':
                         ensure => present,
                         name   => $package32_name,
                     }
@@ -38,7 +38,7 @@ class video-driver (
                 'nvidia':   { $package_name = 'nvidia' }
                 'vesa':     { $package_name = 'xf86-video-vesa' }
             }
-            package { 'video-driver':
+            package { 'video-card':
               ensure => present,
               name   => $package_name,
             }
@@ -50,7 +50,7 @@ class video-driver (
                     'nvidia':   { $package32_name = 'lib32-nvidia-utils' }
                 }
                 if $package32_name {
-                    package { 'video_driver32':
+                    package { 'video_card':
                         ensure => present,
                         name   => $package32_name,
                     }
