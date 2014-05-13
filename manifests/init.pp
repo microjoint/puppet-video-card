@@ -2,6 +2,7 @@ class video-card (
     $controller     = 'vesa',
     $install_32bit  = false,
     $open_source    = true,
+    $package_ensure = 'latest',
 ){
     case $open_source {
         true: {
@@ -13,7 +14,7 @@ class video-card (
                 'via':      { $package_name = 'xf86-video-openchrome' }
             }
             package { 'video-card':
-              ensure => present,
+              ensure => $package_ensure,
               name   => $package_name,
             }
 
@@ -25,7 +26,7 @@ class video-card (
                 }
                 if $package32_name {
                     package { 'video_card':
-                        ensure => present,
+                        ensure => $package_ensure,
                         name   => $package32_name,
                     }
                 }
@@ -39,7 +40,7 @@ class video-card (
                 'vesa':     { $package_name = 'xf86-video-vesa' }
             }
             package { 'video-card':
-              ensure => present,
+              ensure => $package_ensure,
               name   => $package_name,
             }
 
@@ -51,7 +52,7 @@ class video-card (
                 }
                 if $package32_name {
                     package { 'video_card':
-                        ensure => present,
+                        ensure => $package_ensure,
                         name   => $package32_name,
                     }
                 }
