@@ -13,9 +13,11 @@ class video-card (
                 'ati':      { $package_name = 'xf86-video-ati' }
                 'via':      { $package_name = 'xf86-video-openchrome' }
             }
-            package { 'video-card':
-              ensure => $package_ensure,
-              name   => $package_name,
+            if $package_name != 'xf86-video-vesa' {
+		    package { 'video-card':
+		      ensure => $package_ensure,
+		      name   => $package_name,
+		    }
             }
 
             if $install_32bit == 'true' {
