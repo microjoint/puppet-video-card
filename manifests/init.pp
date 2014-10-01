@@ -9,7 +9,7 @@ class video-card (
             case $controller {
                 'vesa':     { $package_name = 'xf86-video-vesa' }
                 'intel':    { $package_name = 'xf86-video-intel' }
-                'nvidia':   { $package_name = 'xf86-video-nvidia' }
+                'nvidia':   { $package_name = 'xf86-video-nouveau' }
                 'ati':      { $package_name = 'xf86-video-ati' }
                 'via':      { $package_name = 'xf86-video-openchrome' }
             }
